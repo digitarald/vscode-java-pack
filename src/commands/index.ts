@@ -11,6 +11,7 @@ import { javaExtGuideCmdHandler } from "../ext-guide";
 import { instrumentOperationAsVsCodeCommand } from "vscode-extension-telemetry-wrapper";
 import { showWelcomeWebview } from "../welcome";
 import { showClasspathConfigurationPage } from "../classpath/classpathConfigurationView";
+import { JavaFormatterSettingsEditorProvider, openFormatterSettingsEditor } from "../formatter-settings";
 
 export function initialize(context: vscode.ExtensionContext) {
   context.subscriptions.push(vscode.commands.registerCommand("java.overview", instrumentCommand(context, "java.overview", instrumentCommand(context, "java.helper.overview", overviewCmdHandler))));
@@ -28,4 +29,7 @@ export function initialize(context: vscode.ExtensionContext) {
   context.subscriptions.push(instrumentOperationAsVsCodeCommand("java.webview.runCommand", webviewCmdLinkHandler));
   context.subscriptions.push(vscode.commands.registerCommand("java.welcome", (options) => showWelcomeWebview(context, options)));
   context.subscriptions.push(vscode.commands.registerCommand("java.classpathConfiguration", () => showClasspathConfigurationPage(context)));
+  const provider = new JavaFormatterSettingsEditorProvider(context);
+  context.subscriptions.push(vscode.window.registerCustomEditorProvider(JavaFormatterSettingsEditorProvider.viewType, provider));
+  context.subscriptions.push(vscode.commands.registerCommand("java.formatterSettings", instrumentCommand(context, "java.formatterSettings", openFormatterSettingsEditor)));
 }
