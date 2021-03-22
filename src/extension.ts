@@ -16,6 +16,7 @@ import { showWelcomeWebview, WelcomeViewSerializer } from "./welcome";
 import { JavaGettingStartedViewSerializer } from "./getting-started";
 import { JavaExtGuideViewSerializer } from "./ext-guide";
 import { ClassPathConfigurationViewSerializer } from "./classpath/classpathConfigurationView";
+import { MarkdownPreviewSerializer } from "./classpath/markdownPreviewProvider";
 
 export async function activate(context: vscode.ExtensionContext) {
   syncState(context);
@@ -36,6 +37,7 @@ async function initializeExtension(_operationId: string, context: vscode.Extensi
   context.subscriptions.push(vscode.window.registerWebviewPanelSerializer("java.gettingStarted", new JavaGettingStartedViewSerializer()));
   context.subscriptions.push(vscode.window.registerWebviewPanelSerializer("java.welcome", new WelcomeViewSerializer()));
   context.subscriptions.push(vscode.window.registerWebviewPanelSerializer("java.classpathConfiguration", new ClassPathConfigurationViewSerializer()));
+  context.subscriptions.push(vscode.window.registerWebviewPanelSerializer("java.markdownPreview", new MarkdownPreviewSerializer()));
 
   const config = vscode.workspace.getConfiguration("java.help");
 
