@@ -7,7 +7,7 @@ import { JavaFormatterSettingPanel } from "./FormatterConstants";
 import { formatterConverter } from "./FormatterConverter";
 import * as xml2js from "xml2js";
 
-export function openFormatterSettingsEditor(context: ExtensionContext, operationId: string) {
+export function showFormatterSettingsEditor(context: ExtensionContext, operationId: string) {
 	let resource = Uri.file("C:/work/test/spring-petclinic/eclipse-formatter.xml");
 	commands.executeCommand("vscode.openWith", resource, "java.formatterSettingsEditor");
 }
