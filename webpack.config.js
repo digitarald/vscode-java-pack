@@ -15,7 +15,7 @@ module.exports = function (env, argv) {
       'ext-guide': './src/ext-guide/assets/index.ts',
       welcome: './src/welcome/assets/index.ts',
       classpath: './src/classpath/assets/index.tsx',
-      'formatter-settings': './src/formatter-settings/assets/index.ts'
+      'formatter-settings': './src/formatter-settings/assets/index.tsx'
     },
     module: {
       rules: [{
