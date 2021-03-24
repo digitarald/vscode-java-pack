@@ -15,7 +15,7 @@ import { changeCommonSettings } from "../FormatterSettingViewSlice";
 export interface SettingProps {
   setting: JavaFormatterSetting[],
   filterValue?: string,
-} 
+}
 
 const Setting = (prop: SettingProps): JSX.Element => {
 
@@ -38,10 +38,14 @@ const Setting = (prop: SettingProps): JSX.Element => {
     switch (setting.type) {
       case JavaFormatterSettingType.BOOLEAN:
         return (
-          <div className="form-check">
-            <input type="checkbox" className="form-check-input" id={`${setting.id}`} defaultChecked={(setting.defaultValue === "true")} onChange={handleChange}></input>
-            <label className="form-check-label" htmlFor={`${setting.id}`}>{setting.name}</label>
-          </div>
+          <Row className="setting-section">
+            <Col>
+              <div className="form-check">
+                <input type="checkbox" className="form-check-input" id={`${setting.id}`} defaultChecked={(setting.defaultValue === "true")} onChange={handleChange}></input>
+                <label className="form-check-label" htmlFor={`${setting.id}`}>{setting.name}</label>
+              </div>
+            </Col>
+          </Row>
         );
       case JavaFormatterSettingType.ENUM:
         const candidates = setting.candidates.map((entry, index) => {
@@ -65,14 +69,14 @@ const Setting = (prop: SettingProps): JSX.Element => {
                 </Dropdown.Menu>
               </Dropdown>
             </Col>
-          </Row>
+          </Row >
         );
       case JavaFormatterSettingType.NUMBER:
         return (
           <Row className="setting-section">
             <Col>
-            <span className="setting-section-description">{setting.name}.</span>
-            <div className="input text-break pl-1 mt-1" id={`${setting.id}`} contentEditable="true" onChange={handleChange}>{setting.defaultValue}</div>
+              <span className="setting-section-description">{setting.name}.</span>
+              <div className="input text-break pl-1 mt-1" id={`${setting.id}`} contentEditable="true" onChange={handleChange}>{setting.defaultValue}</div>
             </Col>
           </Row>
         );
@@ -84,7 +88,7 @@ const Setting = (prop: SettingProps): JSX.Element => {
   const dispatch: Dispatch<any> = useDispatch();
 
   const handleSelect = (setting: JavaFormatterSetting, entry: string) => {
-    dispatch(changeCommonSettings({id: setting.id, value: entry}));
+    dispatch(changeCommonSettings({ id: setting.id, value: entry }));
     changeSetting(setting.id, entry);
   };
 
